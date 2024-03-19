@@ -54,3 +54,5 @@ Procedure exportarSinStock(var celulares: ArchivoCelulares);
       close(celulares);
       close(archivo_txt);
     end;
+
+6. Esta bien hacer assigns en procedimientos y no en el programa principal ?
