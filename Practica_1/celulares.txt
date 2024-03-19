@@ -1,0 +1,9 @@
+ 45 -15536  Samsung
+ 9 3  La vieja confiable
+  Samsung Galaxy A03
+ 2 -25536  Motorola
+ 15 2  Poderoso el chiquitin
+  Moto G5
+ 9 -31072  Samsung
+ 15 6  Camara 50MP 4gb de ram
+  Samsung Galaxy A13

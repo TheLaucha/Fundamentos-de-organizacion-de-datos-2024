@@ -1,0 +1,3 @@
+ 32 5000 Samsung
+ 0 3 Plegable
+ Galaxy Fold 4

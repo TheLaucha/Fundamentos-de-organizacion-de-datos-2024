@@ -1,0 +1,40 @@
+2
+Lopez
+Juan
+6 4
+3
+Martinez
+Ana
+7 5
+4
+Rodriguez
+Pedro
+4 2
+5
+Gomez
+Sofia
+8 6
+6
+Perez
+Carlos
+3 1
+7
+Fernandez
+Lucia
+9 7
+8
+Diaz
+Pablo
+5 3
+9
+Sanchez
+Laura
+6 4
+10
+Ramirez
+Diego
+7 5
+11
+Torres
+Andrea
+4 2

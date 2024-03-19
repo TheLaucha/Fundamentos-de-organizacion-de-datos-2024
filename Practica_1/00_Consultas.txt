@@ -1,0 +1,56 @@
+1. El close donde se debe hacer ? 
+Puedo hacer un reset(arch_logico) -> Llamo a procedimiento y dentro hago el close.
+Puedo hacer un reset(arch_logico) -> Llamo a procedimiento -> Cuando vuelvo al programa o funcion desde el que llame hago el close.
+2. Al exportar de un archivo binario a un archivo de texto (ej 4 c), esta bien hacer el assign y rewrite del archivo txt en el procedimiento ? o eso deberia enviarlo por parametro ?
+3. Que es mas correcto al aniadir final:
+Tener todo en un procedimiento donde solo se abre el archivo y se cierra una vez.
+
+Procedure aniadirCelulares(var celulares: ArchivoCelulares);
+    var
+      cel: rCelular;
+    begin
+      reset(celulares);
+      seek(celulares, filesize(celulares));
+      leerCelular(cel);
+      while (cel.cod <> 0 ) do begin
+        write(celulares,cel);
+        leerCelular(cel);
+      end;
+      close(celulares);
+    end;
+
+
+O tener un procedimiento agregarFinal que abre y cierra por cada celular agregado ?
+Procedure agregarFinal(var celulares: ArchivoCelulares; cel: rCelular);
+    begin
+      reset(celulares);
+      seek(celulares, filesize(celulares));
+      write(celulares,cel);
+      close(celulares);
+    end;
+
+4. Si hago un reset(archivo) en un procedimiento, finalizo el el procedimiento, y en el lugar donde retorno hago el close(), es correcto ? el archivo se mantiene abierto ? o se cierra al finalizar el procedimiento ?
+
+5. En exportarSinStock, esta bien crear el archivo de texto en el procedimiento ? o deberia crearlo en el programa principal y pasarlo por parametro ?
+
+Procedure exportarSinStock(var celulares: ArchivoCelulares);
+    var
+      archivo_txt: Text;
+      cel: rCelular;
+    begin
+      Assign(archivo_txt, 'SinStock.txt');
+      rewrite(archivo_txt);
+      reset(celulares);
+      while not (eof(celulares)) do begin
+        read(celulares, cel);
+        with cel do begin
+          if (stockDisponible = 0) then begin
+            writeln(archivo_txt,' ', cod,' ', precio,' ', marca);
+            writeln(archivo_txt,' ', stockDisponible,' ', stockMin,' ', descripcion);
+            writeln(archivo_txt,' ', nombre);
+          end;
+        end;
+      end;
+      close(celulares);
+      close(archivo_txt);
+    end;
