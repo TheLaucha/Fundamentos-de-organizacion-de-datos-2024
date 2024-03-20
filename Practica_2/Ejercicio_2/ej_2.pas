@@ -163,13 +163,35 @@ program ej_2;
       end;
       // Actualizo reg maestro
       seek(master, filepos(master) - 1);
-      regm.cant_cursadas_aprobadas := cont_cursadas;
-      regm.cant_final_aprobado := cont_finales;
+      regm.cant_cursadas_aprobadas := regm.cant_cursadas_aprobadas + cont_cursadas;
+      regm.cant_final_aprobado := regm.cant_final_aprobado + cont_finales;
       write(master, regm);
     end;
     close(detail);
     close(master);
-    imprimirMaestro(master);
+  end;
+
+  procedure listarMasDeCuatroSinFinal(var master: ArchivoMaestro);
+  var
+    al: rAlumno;
+    archivoTxt: Text;
+  begin
+    Assign(archivoTxt, 'alumnosMasDeCuatroCursadasSinFinal.txt');
+    rewrite(archivoTxt);
+    reset(master);
+    while not (eof(master)) do begin
+      read(master, al);
+      with al do begin
+        if (cant_cursadas_aprobadas > 4) then begin
+          writeln(archivoTxt, cod);
+          writeln(archivoTxt, apellido);
+          writeln(archivoTxt, nombre);
+          writeln(archivoTxt, cant_cursadas_aprobadas,' ', cant_final_aprobado);
+        end;
+      end;
+    end;
+    close(archivoTxt);
+    close(master);
   end;
 
   procedure mostrarMenu(var master: ArchivoMaestro; var detail: ArchivoDetalle; var masterTxt, detailTxt: Text);
@@ -186,6 +208,7 @@ program ej_2;
       writeln('3. Crear reporte de alumnos en archivo "reporteAlumnos.txt: ');
       writeln('4. Crear reporte de detalles en archivo "reporteDetalle.txt: ');
       writeln('5. Actualizar archivo maestro: ');
+      writeln('6. Listar alumnos con mas de 4 materias con cursada aprobada pero sin final: ');
       readln(opcion);
       case opcion of 
         1: crearArchivoMaestro(master, masterTxt);
@@ -193,6 +216,7 @@ program ej_2;
         3: crearReporteAlumnos(master, reporteAlumnosTxt);
         4: crearReporteDetalle(detail, reporteDetalleTxt);
         5: actualizarArchivoMaestro(master, detail);
+        6: listarMasDeCuatroSinFinal(master);
       end;
     end;
 
