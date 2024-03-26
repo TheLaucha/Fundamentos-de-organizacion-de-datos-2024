@@ -1,0 +1,12 @@
+papel
+papel higienico
+-191 50.00
+teclado
+teclado rgb
+-40 500.00
+mouse
+mouse gamer
+-30 100.00
+Agenda
+Agenda 2024
+-20 10.00
