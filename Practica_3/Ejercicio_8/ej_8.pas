@@ -88,6 +88,7 @@ program ej_8;
   var
     nombre: string;
     existe: boolean;
+    cab, d: rDistro;
   begin
     writeln('Escriba el nombre de la distribucion a dar de baja: ');
     readln(nombre);
@@ -96,7 +97,19 @@ program ej_8;
       writeln('Distribucion no existente...')
     else begin
       reset()
+      leer(distros, cab);
+      leer(distros, d);
+      while (d.nombre <> nombre) do
+        leer(distros, d);
+      seek(distros, filepos(distros)-1);
+      cab.cant_desarrolladores := -(filepos(distros));
+      d.cant_desarrolladores := cab.cant_desarrolladores;
+      write(distros, d);
+      seek(distros, 0);
+      write(distros, cab);
     end;
+    close(distros);
+    writeln('DISTRO ELIMINADA');
   end;
 
   var
