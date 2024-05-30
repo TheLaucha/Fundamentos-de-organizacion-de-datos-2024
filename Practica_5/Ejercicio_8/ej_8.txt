@@ -1,0 +1,15 @@
+Realice el proceso de dispersión mediante el método de hashing extensible, sabiendo que
+cada registro tiene capacidad para dos claves. 
+El número natural indica el orden de llegada de las mismas. 
+Se debe mostrar el estado del archivo para cada operación. 
+Justifique brevemente ante colisión y desborde los pasos que realiza.
+
+1 Buenos Aires ....1001 
+2 San Juan ....0100
+3 Entre Ríos ....1110 
+4 Corrientes ....0010
+5 San Luis ....0101 
+6 Tucumán ….0111
+7 Rio Negro ….0011 
+8 Jujuy ….1111
+

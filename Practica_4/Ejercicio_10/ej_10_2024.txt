@@ -1,0 +1,62 @@
+Dado el siguiente árbol B de orden 5, mostrar cómo quedaría el mismo luego de realizar
+las siguientes operaciones: +450, -485, -511, -614.
+
+Política de resolución de underflows: derecha.
+
+                    2: 0 (315) 1 (485) 4 (547) 5 (639) 3
+
+0: (148)(223) 1: (333)(390)(442)(454) 4: (508)(511) 5: (614)(633) 3: (789)(915)
+
+_____________________________________________________________________________________________
+
++450 -> L2, L1, E1, E6, E2, E7, E8
+
+Se intenta insertar en nodo 1, se genera overflow, se divide, se crea nodo 6 y se promciona elem=442
+Se intenta insertar en nodo 2, se genera overflow, se divide, se crea nodo 7 y promociona elem=485
+Se crea nodo 8 y se inserta elem=485
+
+                                  8: 2 (485) 7
+
+                    2: 0 (315) 1 (442) 6  7: 4 (547) 5 (639) 3
+
+0: (148)(223) 1: (333)(390) 6: (450)(454) 4: (508)(511) 5: (614)(633) 3: (789)(915)
+
+_____________________________________________________________________________________________
+
+-485 -> L8, L7, L4, E4, E8
+Baja del elem 485 del nodo 8, se reemplaza por la menor de su subarbol derecho, no se genera underflow
+
+                                  8: 2 (508) 7
+
+                    2: 0 (315) 1 (442) 6           7: 4 (547) 5 (639) 3
+
+0: (148)(223) 1: (333)(390) 6: (450)(454)       4:(511) 5: (614)(633) 3: (789)(915)
+
+_____________________________________________________________________________________________
+
+?? Preguntar si estan bien las lecturas escrituras
+-511 -> L8, L7, L4, L5, E4, E7, E5
+Se genera underflow en nodo 4, se redistribuye con su hermano der.
+
+                                  8: 2 (508) 7
+
+                    2: 0 (315) 1 (442) 6           7: 4 (614) 5 (639) 3
+
+0: (148)(223) 1: (333)(390) 6: (450)(454)       4:(547) 5: (633) 3: (789)(915)
+
+_____________________________________________________________________________________________
+
+?? Preguntar si estan bien las lecutas y escrituras
+?? En este caso en el que se escribe en el nodo 7, tanto el elemento menor del subarbol derecho y luego tambien en el balanceo. Se producen 2 escrituras ? o solo 1 ?
+
+-614 -> L8, L7, L5, L3, E5, E7, E3
+Se reemplaza por el elem mas chico del subarbol derecho.
+Se genera underflow en nodo 5
+Se redistribuye con su hermano der.
+
+
+                                  8: 2 (508) 7
+
+                    2: 0 (315) 1 (442) 6           7: 4 (633) 5 (789) 3
+
+0: (148)(223) 1: (333)(390) 6: (450)(454)       4:(547) 5: (639) 3: (915)

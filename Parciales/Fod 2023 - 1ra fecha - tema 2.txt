@@ -1,0 +1,66 @@
+Dado un ábol B de orden 4 y con política derecha para la resolución de underflow, para cada
+operación dada debe:
+
+a. Dibujar el árbol resultante.
+b. Explicar las decisiones tomadas.
+c. Indicar las lecturas y escrituras en el orden de ocurrencia.
+
+Las operaciones a realizar son: +260, -310, -490, -60
+
+Arbol inicial:
+
+            2: 0 (100) 1(310) 4 (600) 3
+
+  0: (60)    1:(160)(210)(240)      4: (420E490)     3: (800)
+
+________________________________________________________________
+
++260 -> L2, L1, E1, E5, E2, E6, E7
+Se intenta insertar en nodo 1, se produce overflow, se divide y se crea nodo 5, se promociona clave 240
+Se produce overflow en nodo 2, se divide y se crea nodo 6, se promociona clave 310
+Se crea nodo 7
+
+
+                          7: 2 (310) 6
+
+            2: 0 (100) 1 (240) 5       6: 4 (600) 3
+
+  0: (60)    1:(160)(210)  5: (260)      4: (420)(490)     3: (800)
+
+________________________________________________________________
+
+-310 -> L7, L6, L4, E4, E7
+Se elimina clave 310 y se sustituye por el elemento mas chico del subarbol derecho, sin inconvenientes.
+
+
+                          7: 2 (420) 6
+
+            2: 0 (100) 1 (240) 5       6: 4 (600) 3
+
+  0: (60)    1:(160)(210)  5: (260)      4: (490)     3: (800)
+
+________________________________________________________________
+
+-490 -> L7, L6, L4, L3, E4, E3, L2, E2, E6, E7
+
+Se produce underflow en nodo 4, se intenta redistribuir con hermano der pero no se puede porque esta en minimo.
+Se fusiona con nodo 3, se elimina nodo 3.
+Se produce underflow en nodo 6, al ser un caso extraordinario ya que es un nodo extremo, se puede redistribuir con hermano izq.
+Se redistribuye con hermano izq.
+
+
+                          7: 2 (240) 6
+
+            2: 0 (100) 1          6: 5 (420) 4
+
+  0: (60)    1:(160)(210)       5: (260)      4: (600)(800)
+
+________________________________________________________________
+
+-60 -> L7, L2, L0, L1, E0, E1, E2
+
+                          7: 2 (240) 6
+
+            2: 0 (160) 1          6: 5 (420) 4
+
+  0: (100)    1:(210)       5: (260)      4: (600)(800)

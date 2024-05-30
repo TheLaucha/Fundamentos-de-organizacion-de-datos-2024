@@ -72,7 +72,7 @@ program ej_3;
         seek(novelas, filepos(novelas)-1); // Me vuelvo a posicionar en el lugar libre 
         write(novelas, newNov); // Escribo la nueva novela en el lugar libre
         seek(novelas, 0); // Vuelvo a la pos 0
-        write(novelas, aux); // Escribo el indice que indica el prox lugar libre
+        write(novelas, ind); // Escribo el indice que indica el prox lugar libre
       end
       else begin
         seek(novelas, filsize(novelas)); // Me posiciono al final

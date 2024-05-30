@@ -1,0 +1,68 @@
+Dado el siguiente árbol B de orden 5, mostrar cómo quedaría el mismo luego de realizar
+las siguientes operaciones: +320, -390, -400, -533. Justificar detalladamente cada
+operación indicando lecturas y escrituras en orden de ocurrencia. Para la resolución de
+underflow debe utilizar política a izquierda. Graficar cada operación por separado.
+
+
+                    2: 0 (220) 1 (390) 4 (455) 5 (541) 3
+
+0: (10)(150) 1: (225)(241)(331)(360) 4: (400)(407) 5: (508)(533) 3: (690)(823)
+
+_____________________________________________________________________________________________
+
++320 -> L2, L1, E1, E6, E2, E7, E8
+Se intenta insertar en el nodo 1, se produce overflow, se divide, se crea nodo 6, se promociona 320
+Se produce overflow en nodo 2, se divide, se crea nodo 7 y se promociona elem=390
+Se crea nodo 8
+
+                            8: 2 (390) 7
+
+              2: 0 (220) 1 (320) 6                7: 4 (455) 5 (541) 3
+
+0: (10)(150) 1: (225)(241) 6: (331)(360)     4: (400)(407) 5: (508)(533) 3: (690)(823)
+
+
+_____________________________________________________________________________________________
+
+-390 -> L8, L7, L4, E8
+Se sustituye por el elemento mas chico del subarbol derecho (400)
+No se produce underflow en nodo 4 ya que el minimo es 1.
+
+
+
+                            8: 2 (400) 7
+
+              2: 0 (220) 1 (320) 6                7: 4 (455) 5 (541) 3
+
+0: (10)(150) 1: (225)(241) 6: (331)(360)     4: (407) 5: (508)(533) 3: (690)(823)
+
+
+_____________________________________________________________________________________________
+
+-400 -> L8, L7, L4, L5, E5, E7, E4, E8
+Se sustituye por el elem mas chico del subarbol derecho
+se produce underflow en nodo 4
+Como no tiene hermano izq ya que es un exremo del arbol, se redistribuye con hermano derecho
+
+
+
+                            8: 2 (407) 7
+
+              2: 0 (220) 1 (320) 6                7: 4 (508) 5 (541) 3
+
+0: (10)(150) 1: (225)(241) 6: (331)(360)     4: (455) 5: (533) 3: (690)(823)
+
+
+_____________________________________________________________________________________________
+
+-533 -> L8, L7, L5, L4, E4, E7
+Se produce underflow en nodo 5
+Se intenta redistribuir con hermano izq, como no se puede porque esta en el minimo, se fusiona y se libera nodo 5
+
+
+
+                            8: 2 (407) 7
+
+              2: 0 (220) 1 (320) 6                7: 4 (541) 3
+
+0: (10)(150) 1: (225)(241) 6: (331)(360)     4: (455, 508) 3: (690)(823)

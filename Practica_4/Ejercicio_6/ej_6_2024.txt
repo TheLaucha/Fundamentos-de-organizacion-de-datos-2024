@@ -1,0 +1,20 @@
+Suponga que se tiene un archivo que contiene información de los empleados de una
+empresa. De cada empleado se mantiene la siguiente información: DNI, legajo, nombre
+completo y salario. Considere que se mantiene además un índice, organizado como
+árbol B de orden 4, que provee acceso indizado a los empleados por su DNI. Grafique
+como queda el archivo de empleados (archivo de datos) y el archivo índice (árbol B)
+tras la inserción de los siguientes registros:
+
+Orden: 4
+Por DNI
+
+Nodo:
+  Elemento: Dni, Indice
+  Cant: entero
+  Hijos: puntero a nodo
+
+                                                7: 2 (35.000.000-1) 6
+
+                  2: 0 (25.000.000-7) 4 (28.000.000-4) 3                    6: 1 (40.000.000-2) 5
+
+0: (21.000.000-9) (23.000.000-8) 4: (26.000.000-5) 3: (32.000.000-3)  1: (36.000.000-10) (37.000.000-6)  5: (45.000.000-11)

@@ -1,0 +1,5 @@
+?? Para agregar un registro al final de un archivo cual es la forma correcta ?
+seek(empleados, filesize(empleados));
+seek(empleados, filesize(empleados)-1);
+
+?? Preguntar si en el parcial, a la hora de escribir archivos de texto, es importante seguir las recomendaciones de los strings, que deberian ir ultimos, o escribir en distintas lineas.

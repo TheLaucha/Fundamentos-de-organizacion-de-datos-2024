@@ -1,0 +1,66 @@
+Dado el siguiente árbol B de orden 4, mostrar cómo quedaría el mismo luego de realizar
+las siguientes operaciones: +5, +9, +80, +51, -50, -92.
+Política de resolución de underflows: derecha.
+
+
+              2: 0 (66) 1
+
+0: (22)(32)(50)       1: (77) (79) (92)
+
+_____________________________________________________________________________________________
+
++5 -> L2, L0, E0, E3, E2
+Se produce overflow en nodo 0, se divide, se crea nodo 3, y se promociona elem=32
+
+              2: 0 (32) 3 (66) 1
+
+0: (5)(22) 3: (50)       1: (77) (79) (92)
+
+_____________________________________________________________________________________________
+
++9 -> L2, L0, E0
+Se inserta sin incovenientes en nodo 0.
+
+
+              2: 0 (32) 3 (66) 1
+
+0: (5)(9)(22) 3: (50)       1: (77) (79) (92)
+
+_____________________________________________________________________________________________
+
++80 -> L2, L1, E1, E4, E2
+Se produce overflow en nodo 1, se divide, se crea nodo 4, se promociona elem 80 que se inserta en nodo 2 sin inconvenientes.
+
+              2: 0 (32) 3 (66) 1 (80) 4
+
+0: (5)(9)(22) 3: (50)       1: (77) (79) 4: (92)
+
+
+_____________________________________________________________________________________________
+
++51 -> L2, L3, E3
+Se inserta sin inconvenientes en nodo 3
+
+
+              2: 0 (32) 3 (66) 1 (80) 4
+
+0: (5)(9)(22) 3: (50)(51)       1: (77) (79) 4: (92)
+
+_____________________________________________________________________________________________
+
+-50 -> L2, L3, E3
+Se elimina sin inconvenientes del nodo 3
+
+              2: 0 (32) 3 (66) 1 (80) 4
+
+0: (5)(9)(22) 3: (51)       1: (77) (79) 4: (92)
+
+_____________________________________________________________________________________________
+
+-92 -> L2, L4, L1, E1, E4, E2
+Como es un nodo hoja extremo, no tiene hermano derecho, entonces se redistribuye con su hermano izq.
+
+
+              2: 0 (32) 3 (66) 1 (79) 4
+
+0: (5)(9)(22) 3: (51)       1: (77) 4: (80)

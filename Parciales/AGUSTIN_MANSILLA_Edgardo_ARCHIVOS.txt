@@ -1,0 +1,57 @@
+Orden 4   , Max=3, min= 1 -> (M/2)-1
+política izquierda 
+Arbol B
+
+                2:0(110)1(140)3(208)4
+
+0:(28) 1:(122)(123) 3:(164) (182) (193)  4: (314)(360) (470) 
+
+________________________________________________________________
+
++210 -> L2, L4, E4, E5, E2, E6, E7
+Se intenta insertar en nodo 4, se produce overflow, se divide y se crea nodo 5. Se promociona elem 360.
+Se produce overflow en nodo 2, se divide, se crea nodo 6, se promociona elem 208.
+Se crea nodo 7.
+
+                                    7: 2 (208) 6
+
+                      2:0 (110) 1 (140) 3       6: 4 (360) 5
+
+0:(28)      1:(122)(123)       3:(164) (182) (193)       4: (210)(314)  5:(470) 
+
+________________________________________________________________
+
++165 -> L7, L2, L3, E3, E8, E2
+Se intenta insertar en nodo 3, se produce overflow, se divide, se crea nodo 8, se promociona elem 182.
+
+                                    7: 2 (208) 6
+
+                      2:0 (110) 1 (140) 3 (182) 8       6: 4 (360) 5
+
+0:(28)      1:(122)(123)       3:(164) (165) 8: (193)       4: (210)(314)  5:(470) 
+
+________________________________________________________________
+
+-28 L7, L2, L0, L1, E0, E1, E2
+Se elimina elemento de nodo 0, se produce underflow, se redistribuye con hermano der ya que es un nodo extremo y no tiene hermano izquierdo.
+El hermano derecho le permite redistribuir.
+
+                                    7: 2 (208) 6
+
+                      2:0 (122) 1 (140) 3 (182) 8       6: 4 (360) 5
+
+0:(110)      1:(123)       3:(164) (165) 8: (193)       4: (210)(314)  5:(470)
+
+________________________________________________________________
+
+-110 -> L7, L2, L0, L1, E0, E2
+Se elimina elemento de nodo 0, se produce underflow, se produce caso especial ya que es un nodo extremo y se intenta redistribuir con hermano derecho.
+Hermano derecho no puede redistribuir porque esta con elementos minimos.
+Se fusiona con hermano derecho.
+
+
+                                    7: 2 (208) 6
+
+                      2:0 (140) 3 (182) 8       6: 4 (360) 5
+
+          0:(122)(123)    3:(164) (165) 8: (193)       4: (210)(314)  5:(470)

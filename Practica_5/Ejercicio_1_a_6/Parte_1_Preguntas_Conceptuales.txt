@@ -1,0 +1,65 @@
+1. Defina el concepto de hashing (o dispersión). ¿Cómo se relaciona este concepto con
+archivos?
+Respuesta larga: 
+Un archivo directo o con acceso directo, es un archivo en el cual cualquier registro puede ser accedido sin acceder antes a otros registros, es decir, cualquier registro puede ser accedido directamente.
+En un archivo serie, en cambio, un registro esta disponible solo cuando el registro predecesor fue procesado.
+Los archivos directos son almacenados en disco de diferentes formas respecto de los archivos serie.
+Esta forma de almacenamiente permite una rapida recuperacion de la informacion contenida en el archivo, que es el objetivo principal de un archivo directo.
+El mecanismo que trata de asegurar una recuperacion rapida de registros, en un solo acceso promedio, lleva el nombre de dispersion o hashing.
+Las alternativas mas comunes de dispersion son: dispersion con espacio de direccionamiento estaico y dispersion con espacio de direccionamiento dinamico.
+Respuesta corta:
+Es un mecanismo que trata de asegurar una recuperacion rapida de registros, en un solo acceso promedio.
+
+2. Explique el concepto de función de dispersión. Enumere al menos tres funciones de
+dispersión y explique brevemente cómo funciona cada una.
+
+La funcion de dispersion transforma un valor, que representa una llave primaria de un registro, en otro valor dentro de un determinado rango, que se utiliza como direccion fisica de acceso para insertar un registro en un archivo de datos.
+
+Funcion #1: Sumo digitos de la clave
+Funcion #2: F(x) = (x mod [x/2]) + x/2 -> Al resto de la clave le sumo la mitad de la clave
+Funcion #3: Multiplico primer y ultimo digito y lo divido por el del medio
+
+3. Explique los conceptos de sinónimo, colisión y desborde (overflow). ¿Qué condición es
+necesaria en el archivo directo para que pueda ocurrir una colisión y no un desborde?
+
+Sinonimo: Cuando para dos claves diferentes, la funcion de dispersion retorna el mismo resultado. Por ejemplo, si el resultado de la funcion de dispersion es la suma de los caracteres ASCII, DACA y CADA retornarian lo mismo, son sinonimos.
+
+Colision: Cuando un registro es asignado a una direccion que esta siendo utilizada por otro registro.
+
+Desborde: Cuando un registro es asignado a una direccion que esta siendo utilizada por otro registro y no queda espacio para este nuevo.
+
+Para que ocurra solo una colision y no un desborde, debe haber espacio disponible en la direccion asignada por la funcion de dispersion, en esta direccion se encuentra uno o mas registros previamente.
+
+4. ¿Qué alternativas existen para reducir el número de colisiones (y por ende de
+desbordes) en un archivo organizado mediante la técnica de hashing?
+
+Algunas alternativas podrian ser:
+- Elegir un algoritmo de dispersion perfecto, que no genere colisiones. Esto es extremadamente dificil.
+- Minimizar el numero de colisiones a una cantidad aceptable, y de esta manera, tratar las colisiones como una condicion especial.
+Para reducir el numero de colisiones las alternativas disponibles son:
+- Distribuir los registros de la forma mas aleatoria posible.
+- Utilizar mas espacio de disco.
+- Almacenar mas de un registro por cada direccion fisica en el archivo.
+
+
+5. Explique brevemente qué es la densidad de empaquetamiento. ¿Cuáles son las
+consecuencias de tener una menor densidad de empaquetamiento en un archivo
+directo?
+
+La DE es la relacion entre el espacio disponible para el archivo de datos y la cantidad de registros que integran dicho archivo.
+Si la DE se mantiene baja, se dispone de mayor espacio para esparcir registros y disminuye la probabilidad de colisiones, pero se desperdicia espacio en disco, ya que se utiliza menos espacio que el reservado.
+
+6. Explique brevemente cómo funcionan las siguientes técnicas de resolución de desbordes que se pueden utilizar en hashing estático.
+
+● Saturación progresiva
+Consiste en almacenar el registro en la direccion siguiente, mas proxima al nodo donde se produce saturacion.
+
+● Saturación progresiva encadenada
+El metodo funciona igual al de saturacion progresiva, la diferencia es que la direccion donde se almacena el registro, se enlaza con la direccion base.
+
+● Saturación progresiva encadenada con área de desborde separada
+Dado que ante un caso de colisión, se re-direcciona a una nueva dirección, esto provoca que los registros no estén en la dirección original. Por lo tanto, se propone un sector reservado para almacenar estos registros en colisión, por lo que la función de dispersión no puede alcanzarse. La dirección original apuntará a la dirección correspondiente en este sector
+
+● Dispersión doble
+El metodo consiste en disponer de dos funciones de hash, la primera obtiene la direccion base, en donde el registro sera ubicado. 
+En caso de overflow, se utiliza la segunda funcion, que lo que retorna es un desplazamiento, este desplazamiento se suma a la direccion base, en caso de generarse nuevamente overflow, se debera sumar de manera reiterada este desplazamiento, hasta encontrar una dieccion con espacio suficiente.

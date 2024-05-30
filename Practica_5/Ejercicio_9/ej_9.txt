@@ -1,0 +1,109 @@
+Para las siguientes claves, realice el proceso de dispersión mediante el método de hashing
+extensible, sabiendo que cada nodo tiene capacidad para dos registros. 
+El número natural indica el orden de llegada de las claves.  
+Se debe mostrar el estado del archivo para cada operación. 
+Justifique brevemente ante colisión y desborde los pasos que realiza.
+
+1 Borges 11110100 
+2 Sabato 00111111
+3 Cortazar 01010111 
+4 Lugones 10100101
+5 Casares 10101010 
+6 Walsh 01101011
+
+Tabla de direcciones -> 0
+XX <- DIRECCION -> XX
+
+_______________________________________________
+
+Llega Borges -> 11110100
+Llega Sabato -> 00111111
+
+Tabla de direcciones -> 0
+XX <- DIRECCION -> XX
+
+Nodo #0 <- [Borges][Sabato] -> 0
+
+_______________________________________________
+
+Llega Cortazar -> 01010111
+Se produce overflow
+Se incrementa el valor de nodo 0
+Se crea nuevo nodo con ese valor
+Se compara con valor de tabla de dir
+1 <= 0
+Se incrementa valor de la tabla de dir
+Se duplica direcciones de la tabla
+Se reorganizan los registros.
+
+Tabla de direcciones -> 1
+0 <- DIRECCION -> Nodo #0
+1 <- DIRECCION -> Nodo #1
+
+Nodo #0 <- [Borges][] -> 1
+Nodo #1 <- [Sabato][Cortazar] -> 1
+
+_______________________________________________
+
+Llega Lugones -> 10100101
+Se produce overflow
+Se incrementa valor nodo #1
+Se crea nuevo nodo con ese valor
+Se compara con el valor de la tabla de dir
+2 <= 1 ?
+Se incrementa valor tabla de dir
+Se duplica direcciones en la tabla de dir
+Se reorganizan los registros
+
+Tabla de direcciones -> 2
+00 <- DIRECCION -> Nodo #0
+10 <- DIRECCION -> Nodo #0
+01 <- DIRECCION -> Nodo #1
+11 <- DIRECCION -> Nodo #2
+
+Nodo #0 <- [Borges][] -> 1
+Nodo #1 <- [Lugones][] -> 2
+Nodo #2 <- [Sabato][Cortazar] -> 2
+
+_______________________________________________
+
+Llega Casares -> 10101010
+Se inserta sin problemas
+
+Tabla de direcciones -> 2
+00 <- DIRECCION -> Nodo #0
+10 <- DIRECCION -> Nodo #0
+01 <- DIRECCION -> Nodo #1
+11 <- DIRECCION -> Nodo #2
+
+Nodo #0 <- [Borges][Casares] -> 1
+Nodo #1 <- [Lugones][] -> 2
+Nodo #2 <- [Sabato][Cortazar] -> 2
+
+_______________________________________________
+
+Llega Walsh -> 01101011
+Se produce overflow
+Se incrementa valor nodo #2
+Se crea nuevo nodo con ese valor
+Se compara valor con valor de la tabla de dir
+3 <= 2
+Se inc tabla de dir
+Se duplica direcciones en la tabla
+se reorganizan los registros
+
+
+Tabla de direcciones -> 3
+000 <- DIRECCION -> Nodo #0
+100 <- DIRECCION -> Nodo #0
+010 <- DIRECCION -> Nodo #0
+110 <- DIRECCION -> Nodo #0
+001 <- DIRECCION -> Nodo #1
+101 <- DIRECCION -> Nodo #1
+011 <- DIRECCION -> Nodo #2
+111 <- DIRECCION -> Nodo #3
+
+Nodo #0 <- [Borges][Casares] -> 1
+Nodo #1 <- [Lugones][] -> 2
+Nodo #2 <- [Walsh][] -> 3
+Nodo #3 <- [Sabato][Cortazar] -> 3

@@ -1,0 +1,35 @@
+Dado el siguiente árbol B + de orden 4 y con política de resolución de underflows a
+derecha, realice las siguientes operaciones indicando lecturas y escrituras en el orden
+de ocurrencia. Además, debe describir detalladamente lo que sucede en cada
+operación. +80, -400.
+
+
+                                4: 0 (340) 1 (400) 2 (500) 3
+
+0: (11)(50)(77) 1       1: (340)(350)(360) 2          2: (402)(410)(420) 3        3: (520)(530) -1
+
+_____________________________________________________________________________________________
+
++80 -> L4, L0, E0, E5, E4, E6, E7
+Se intenta insertar en nodo 0, se produce overflow, se divide y se crea nodo 5, se duplica el elemento mas chico en el nodo 4.
+Se produce overflow en el nodo 4, se divide y se crea nodo 6, se promociona elem 400
+Se crea nodo 7
+
+
+                                              7: 4 (400) 6
+
+                              4: 0 (77) 5 (340) 1         6: 2 (500) 3
+
+0: (11)(50) 5     5:(77)(80) 1       1: (340)(350)(360) 2          2: (402)(410)(420) 3        3: (520)(530) -1
+
+_____________________________________________________________________________________________
+
+-400 -> L7, L6, L2, E2, E7
+?? Se reemplaza por el elemento mas chico del subarbol derecho
+?? Se borra el elemento 402 del nodo 2 ?
+
+                                              7: 4 (402) 6
+
+                              4: 0 (77) 5 (340) 1         6: 2 (500) 3
+
+0: (11)(50) 5     5:(77)(80) 1       1: (340)(350)(360) 2          2: (410)(420) 3        3: (520)(530) -1
